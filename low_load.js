@@ -6,7 +6,7 @@ console.log("Program starting...");
 let start = process.hrtime.bigint(); // high-resolution time
 console.log(`Start time: ${(Number(start) / 1e9).toFixed(3)}`);
 
-for (let i = 1; i <= BigInt(n); i++) {
+for (let i = 1; i <= n; i++) {
     sum += i;
 }
 
