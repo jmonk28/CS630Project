@@ -34,7 +34,7 @@ def main():
 
     random.seed()
 
-    print("Sorting 10000 random numbers from 1 to 100...")
+    print("Sorting 1000000 random numbers from 1 to 100...")
 
     # Generate 1M random numbers
     for i in range(n):
