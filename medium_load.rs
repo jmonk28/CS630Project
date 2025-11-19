@@ -1,6 +1,7 @@
 use std::time::{SystemTime, UNIX_EPOCH};
+use std::thread;
 
-fn quicksort(mut arr: Vec<i32>) -> Vec<i32> {
+fn quicksort(arr: Vec<i32>) -> Vec<i32> {
     if arr.len() < 2 {
         return arr;
     }
@@ -26,16 +27,16 @@ fn quicksort(mut arr: Vec<i32>) -> Vec<i32> {
     sorted
 }
 
-fn main() {
+fn medium_load_main() {
     const SIZE: usize = 1_000_000;
 
     // Generate random values (fixed seed)
     let mut nums = Vec::with_capacity(SIZE);
     for i in 0..SIZE {
-        nums.push(((i * 7919) % 1_000_000) as i32);
+        nums.push(((i * 7919) % 100) as i32);
     }
 
-    println!("Program starting...");
+    println!("Rust program starting...");
 
     let start = SystemTime::now();
     let start_secs = start.duration_since(UNIX_EPOCH).unwrap().as_secs_f64();
@@ -52,4 +53,17 @@ fn main() {
 
     println!("First element: {}", sorted[0]);
     println!("Last element: {}", sorted[sorted.len() - 1]);
+}
+
+fn main() {
+    let stack_size = 32 * 1024 * 1024; // 32 MB stack
+
+    let handle = thread::Builder::new()
+        .stack_size(stack_size)
+        .spawn(|| {
+            medium_load_main();
+        })
+        .expect("Failed to spawn thread with custom stack size");
+
+    handle.join().unwrap();
 }

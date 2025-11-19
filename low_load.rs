@@ -1,7 +1,7 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 
 fn main() {
-    println!("Program starting...");
+    println!("Rust program starting...");
 
     let start = SystemTime::now();
     let start_secs = start.duration_since(UNIX_EPOCH).unwrap().as_secs_f64();
